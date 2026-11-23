@@ -1,0 +1,117 @@
+:root,
+[data-theme="mocha"] {
+  --bg: #1e1e2e;
+  --text: #CCD5F4; /*Usually black or white*/
+  --color-text: #CAA5F7;
+  --muted: #6c6d74;
+  --muted-dark: #7f5a83;
+  --accent: #cba6f7;
+  --footer: #18171a;
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+}
+
+/*Background effect of some kind for later on*/
+#bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/*--------------------------------NAVBAR---------------------------------*/
+/*Head of linux dir path and other sections*/
+.navBar {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    justify-content: center;
+    margin: 15px 30px 0px 15px;
+    padding-top: 20px;
+    color: var(--color-text);
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    backdrop-filter: blur(10px);
+}
+
+.navlink {
+    color: #CCD5F4;
+    font-family: "JetBrains Mono", monospace;
+    text-decoration: none;
+    margin: 5px 15px 5px 15px;
+    padding-left: 15px;
+}
+.navlink:hover {
+    color: var(--accent);
+    font-family: "JetBrains Mono", monospace;
+}
+
+.marginDiv{
+    flex: 0 0 8%;
+}
+
+.fillDiv{
+    flex:auto;
+}
+
+
+/*--------------------------------Footer---------------------------------*/
+
+.footy 
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 0 0 auto;
+    border: 1px soild var(--accent);
+
+}
+
+.footerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex: 1;
+    background-color: var(--footer);
+    padding: 22px;
+    border-radius: 10px;
+    color: var(--text);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+}
+
+.footerLeft,
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.social-icon {
+    display: block;
+    height: 24px;
+    width: 24px;
+    color: var(--text);
+    transition: color 0.2s ease;
+}
+
+.socials a:hover .social-icon {
+    color: var(--accent);
+}
+
+.sep {
+    color: var(--muted);
+
+}

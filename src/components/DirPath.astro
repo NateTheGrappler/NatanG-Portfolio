@@ -1,0 +1,34 @@
+---
+//get the page path from astro
+const urlSegments = Astro.url.pathname.split("/").filter(Boolean);
+import "../styles/standardLayout.css"
+
+
+//join back into a given string for href navigation
+const paths = urlSegments.map((seg, i) => ({
+    name: seg,
+    href: "/" + urlSegments.slice(0, i+1).join("/")
+}))
+
+console.log(urlSegments);
+---
+
+<div class="portfolioDirectory">
+    <span class="user">NatanG@WebSpace</span>: <a href="/">~/</a>
+    {paths.map((c) => (
+        <>
+            <a href={c.href}>{c.name}/</a>
+        </>
+    ))}
+
+    <span class="blinkingCursor"/>
+</div>
+
+<style>
+    .portfolioDirectory{font-family: "JetBrains Mono", monospace;}
+    .user {color: #4ace97;}
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--muted-dark);}
+</style>
+
+
