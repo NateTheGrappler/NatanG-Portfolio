@@ -1,0 +1,104 @@
+.indexDiv 
+{
+    margin-top: 120px;
+    display: flex;
+    flex-direction: row;
+}
+
+/*----------------All of the intro stuff, so links, description, and name----*/
+
+.introDiv
+{
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+}
+
+.marginDiv15Percent
+{
+    flex: 0 0 15%;
+}
+
+/*Might not add this in here*/
+/* .headshotImage 
+{
+    position: sticky;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    border-radius: 30%;
+    margin: 20px;
+} */
+
+.heySpan {
+    font-size: 42px;
+    font-family: "Terminus";
+    font-weight: 600;
+    color: var(--text)
+}
+
+
+.nameSpan {
+    font-size: 42px;
+    font-family: "Terminus";
+    font-weight: 600;
+    color: var(--color-text)
+}
+
+.Description {
+    line-height: 1.6;
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: system-ui;
+    font-weight: 200;
+    color: var(--muted)
+}
+
+.descriptionLink {
+    text-decoration: underline dashed;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    color: var(--dark-text);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin: 2px;
+    border-radius: 40px;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-in;
+}
+
+.descriptionLink:hover {
+    color: var(--bg);
+    background-color: var(--dark-text);
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.socialDiv 
+{
+
+}
+
+.socialIcon
+{
+    height: 18px;
+    width: 18px;
+    color: var(--muted);
+    margin: 5px;
+}
+
+
+
+.socialSpan
+{
+    display: inline-block;
+    line-height: 1.6;
+    font-size: 20px;
+    font-family: system-ui;
+    font-weight: 200;
+    color: var(--muted)
+}
+

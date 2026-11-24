@@ -3,8 +3,9 @@
   --bg: #1e1e2e;
   --text: #CCD5F4; /*Usually black or white*/
   --color-text: #CAA5F7;
-  --muted: #6c6d74;
-  --muted-dark: #7f5a83;
+  --dark-text: #8c73aa;
+  --muted: #9fa1ad;
+  --muted-dark: #8f6694;
   --accent: #cba6f7;
   --footer: #18171a;
 
@@ -51,9 +52,12 @@ body {
     text-decoration: none;
     margin: 5px 15px 5px 15px;
     padding-left: 15px;
+    transition: transform 0.2s ease-in-out;
 }
 .navlink:hover {
-    color: var(--accent);
+    color: var(--color-text);
+    text-decoration: underline;
+    transform: scale(1.1); 
     font-family: "JetBrains Mono", monospace;
 }
 
@@ -70,6 +74,7 @@ body {
 
 .footy 
 {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
