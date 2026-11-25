@@ -1,0 +1,35 @@
+@keyframes blinking 
+{
+    0%, 100%
+    {
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 0;
+    }
+}
+
+
+
+.text {
+    font-size: 42px;
+    font-family: "Terminus";
+    font-weight: 600;
+    color: var(--color-text)
+}
+
+.cursor
+{
+    animation: blinking 1s infinite;
+}
+
+.cursor-slow
+{
+    animation: blinking 4s infinite;
+}
+
+.hideCursor
+{
+    opacity: 0;
+}

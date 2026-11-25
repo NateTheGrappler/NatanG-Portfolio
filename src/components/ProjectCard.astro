@@ -1,0 +1,58 @@
+---
+import { getEntry } from 'astro:content';
+import { getRepo, getLanguages, getStarCount, getContibutors } from '../tools/githubGetter';
+import "../styles/projectcard.css"
+
+interface Props 
+{
+    id: string;
+}
+
+//load in data from the markdown files
+const project = await getEntry('projects', Astro.props.id);
+if (!project) throw new Error(`No project with id "${Astro.props.id}"`);
+
+const {title, repo, description, tags} = project.data;
+const [owner, name] = repo.split("/");
+
+//load in any github data for dynamic rendering at build time
+const [repoData, contributors, starCount, languageInformation] = await Promise.all(
+    [
+        getRepo(repo),
+        getContibutors(repo),
+        getStarCount(repo),
+        getLanguages(repo)
+    ]
+)
+---
+<a href={"/projects/" + title} class="projectCard">
+
+    <!--This is the terminal like image, as well as text, languages, all the fun visual stuff -->
+    <div class="projectCardBackground">
+        <div class="projectCardTerminal">
+            <!--This would be where the buttons go, the title/owner, all that -->
+            <div class="TerminalTop">
+                <div class="TerminalTopLeft">
+                    <span class={"roundedButton1"} color="FECC06"></span>
+                    <span class="roundedButton2"></span>
+                    <span class="roundedButton3"></span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--This holds the things like the tags, the creator, and the description -->
+    <div class="descriptionDiv">
+        <h3>{title}</h3>
+        <p class="desc">{description}</p>
+        <ul class="tags">
+        {tags.map((t) => <li>{t}</li>)}
+        </ul>
+    </div>
+    
+</a>
+
+
+

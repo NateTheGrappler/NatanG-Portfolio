@@ -1,0 +1,141 @@
+.projectCard 
+{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--pc-border);
+    background: var(--bg);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 200ms ease, border-color 200ms ease;
+    margin: 10px 15px 0px 10px;
+    box-shadow: 0px 3px 10px #131318;
+
+}
+
+.projectCard:hover,
+.projectCard:focus-visible 
+{
+    transform: translateY(-1px);
+    border-color: var(--accent);
+}
+/*----------------------------Top Terminal bit-----------------------*/
+.projectCardBackground {
+  aspect-ratio: 16 / 10;
+  padding: 2rem;
+  display: grid;
+  place-items: center;
+  background: var(--pc-stage);
+}
+
+.projectCardTerminal 
+{
+    padding: 5px;
+    aspect-ratio: 16/8;
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    flex: 1 1;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--pc-terminal);
+    transition: transform 0.2s ease-out;
+
+}
+.projectCard:hover .projectCardTerminal 
+{
+    transform: scale(1.05);
+}
+
+.TerminalTop
+{
+    margin: 10px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+.TerminalTopLeft
+{
+    display: flex;
+    flex: 1;
+    flex-direction:row;
+}
+.roundedButton1
+{
+    padding: 5px;
+    background-color: #50D764;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+}
+.roundedButton2
+{
+    margin-left: 8px;
+    padding: 5px;
+    background-color: #FECC06;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+}
+.roundedButton3
+{
+    margin-left: 8px;
+    padding: 5px;
+    background-color: #F74133;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+}
+
+
+
+/*----------------------------information Bottom bit-----------------------*/
+.descriptionDiv 
+{ 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1.2rem 1rem; 
+}
+.descriptionDiv h3 
+{ 
+    font-family: "JetBrains Mono", monospace;
+    margin: 0 0 0.5rem; 
+    font-weight: 900;
+    font-size: 22px;
+    transition: color 0.2s ease;
+
+}
+.projectCard:hover .descriptionDiv h3
+{
+    flex-shrink: 1;
+    color: var(--accent);
+}
+
+.desc 
+{
+    margin: 0;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.tags
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+}
+.tags li
+{
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}

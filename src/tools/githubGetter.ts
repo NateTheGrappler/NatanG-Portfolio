@@ -99,6 +99,9 @@ async function getGithubQLData(query: string, variables: Record<string, unknown>
 export const getRepo = (repo: string)           =>  getGithubData(`/repos/${USER}/${repo}`);
 export const getLanguages = (repo: string)      => getGithubData(`/repos/${USER}/${repo}/languages`);
 export const getCommits = (repo: string, n = 5) => getGithubData(`/repos/${USER}/${repo}/commits?per_page=${n}`);
+export const getStarCount = (repo: string)      => getGithubData(`/repos/${USER}/${repo}/stargazers/count`);
+export const getContibutors = (repo: string)    => getGithubData(`/repos/${USER}/${repo}/contributors`);
+
 export const getActivity = ()                   =>  getGithubData(`/users/${USER}/events/public`);
 
 

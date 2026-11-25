@@ -9,11 +9,24 @@
   --accent: #cba6f7;
   --footer: #18171a;
 
+  /*standards for the project cards*/
+  --pc-stage: #A8B3BF;
+  --pc-terminal: #2C2E3A;
+  --pc-border: #37374e;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg);
+
+}
+
+::selection
+{
+    background-color: var(--accent);
+    color: var(--muted-dark)
 }
 
 body {
@@ -33,17 +46,16 @@ body {
 .navBar {
     display: flex;
     flex-direction: row;
-    flex: 0 0 auto;
     justify-content: center;
     margin: 15px 30px 0px 15px;
     padding-top: 20px;
     color: var(--color-text);
-
     position: sticky;
     top: 0;
     z-index: 10;
-    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    background: color-mix(in srgb, var(--bg) 10%, transparent);
     backdrop-filter: blur(10px);
+    height: 60px;
 }
 
 .navlink {
@@ -104,6 +116,70 @@ body {
     gap: 0.75rem;
 }
 
+@keyframes pulse-ring-green
+{
+  0% 
+  {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7);
+  }
+  70% 
+  {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(0, 230, 118, 0);
+  }
+  100% 
+  {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0);
+  }
+}
+
+@keyframes pulse-ring-red
+{
+  0% 
+  {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(230, 65, 0, 0.7);
+  }
+  70% 
+  {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(0, 230, 118, 0);
+  }
+  100% 
+  {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0);
+  }
+}
+
+.blinkingLight-On
+{
+    padding: 3px;
+    background-color: #00e676;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    animation: pulse-ring-green 2s infinite;
+}
+.blinkingLight-Off
+{
+    padding: 3px;
+    background-color: #e65400;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    animation: pulse-ring-red 2s infinite;
+}
+
+.homelabStatusText
+{
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+}
+
 .social-icon {
     display: block;
     height: 24px;
@@ -120,3 +196,4 @@ body {
     color: var(--muted);
 
 }
+

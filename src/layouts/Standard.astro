@@ -2,6 +2,10 @@
 const { title } = Astro.props;
 import "../styles/standardLayout.css"
 import DirPath from "../components/DirPath.astro"
+import { checkHomelabStatus } from "../tools/midascloudFetch";
+
+const homelabData = await checkHomelabStatus();
+console.log(homelabData);
 ---
 
 <html>
@@ -44,14 +48,15 @@ import DirPath from "../components/DirPath.astro"
                     <span> Natan Guzinski</span>
                     <span class="sep">-</span>
                     <span>HomeLab Status:</span>
+                    <span class="homelabStatusText">
+                        {homelabData.ok ? "Raising my Power Bill" : "Probably on Fire."}
+                    </span>
+                    <span class={homelabData.ok ? "blinkingLight-On" : "blinkingLight-Off"}></span>
+
                 </div>
 
                 <!--Socials with the links, and github commit and what not -->
                 <div class="socials">
-
-
-
-
 
                     <a href="https://github.com/NateTheGrappler" target="_blank" rel="noopener" aria-label="GitHub profile">
                         <svg class="social-icon" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,8 +84,10 @@ import DirPath from "../components/DirPath.astro"
                     </a>
                     
                     
-
                 </div>
+
+                <!--The showcase of the midascloud ping working -->
+
 
             </div>
 

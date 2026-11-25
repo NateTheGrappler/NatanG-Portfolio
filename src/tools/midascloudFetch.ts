@@ -2,17 +2,25 @@ export async function checkHomelabStatus()
 {
     try
     {
-        const response = await fetch(`https://status.midascloud.net/health`, 
+        const response = await fetch(`https://portfolio-worker.guzinskinatan.workers.dev`, 
             {
                 signal: AbortSignal.timeout(5000), //wait 5 sec for connection
             }
         );
-        //online return online
-        return response.ok;;
+
+        if(!response.ok)
+        {
+            console.log("Failure with reaching cloudflare's worker endpoint");
+            return null;
+        }
+        
+        const data = await response.json();
+        return data;
     }
     catch (error)
     {
         //whatever error happens, return offline
-        return false;
+        console.log("Failure with reaching cloudflare's worker endpoint");
+        return null;
     }
 }
