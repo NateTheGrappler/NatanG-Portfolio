@@ -4,7 +4,12 @@ import "../styles/index.css"
 import TypeWritter from "../components/typewritter";
 import ProjectCard from '../components/ProjectCard.astro';
 
+import { recentCommits , profileLanguages} from "../tools/githubGetter";
+import {getButtonCount} from "../tools/buttonBackend";
 
+//get the recent commits and language data for profile
+const profileData = await recentCommits(5);
+const languageData = await profileLanguages();
 ---
 
 
@@ -109,7 +114,7 @@ me building.
 				<!--The Featured Projects Here -->
 				<div class="ProjectCardsDiv">
 					<ProjectCard id="oli-nat"/>
-					<ProjectCard id="oli-nat"/>
+					<ProjectCard id="midascloud"/>
 
 
 				</div>
@@ -117,6 +122,123 @@ me building.
 			</div>
 			<div class="marginDiv15Percent"></div>
 		</div>
+
+		<!--This is things like button count, theme picker, github activity, the works -->
+		<div class="ExtraFunDiv">
+			<div class="marginDiv15Percent"></div>
+			<div class="ExtraFunDivGrid">
+
+				<div id="extraFunBox" class="themePicker">
+					THEME PICKER
+				</div>
+
+
+				<div id="extraFunBox" class="clickMe">
+					<!--Actual button displaystuff -->
+					<div class="clickMeDiv">
+						<button id="clickMeButton">CLICK ME</button>
+					</div>
+					<div class="totalText">
+						<span class="totalText1" id="total">…</span>
+						<span class="totalText2">Total Clicks!</span>
+					</div>
+					<div class="userText">
+						<span class="userText1" id="mine">…</span>
+						<span class="userText2">Your Clicks!</span>
+					</div>
+
+					
+					<!--Add the cloudflare wrangler worker in a script tag because localstorage is undefined while in dev -->
+					<script>
+						import { getButtonCount, updateButtonCount } from "../tools/buttonBackend";
+
+						const totalEl = document.getElementById("total")!;
+						const mineEl = document.getElementById("mine")!;
+
+						function show(counts: { total: number; mine: number }) {
+							totalEl.textContent = String(counts.total);
+							mineEl.textContent = String(counts.mine);
+						}
+						
+						//get the click amounts on each render
+						show(await getButtonCount());
+
+						//update database count on user click
+						document.getElementById("clickMeButton")!.addEventListener("click", async () => {
+							show(await updateButtonCount());
+						});
+					</script>
+				</div>
+
+				<!--List the link to some of the latest commits I've done -->
+				<div id="extraFunBox" class="recentCommit">
+					<!--Title Div With name and image -->
+					<div class="CommitsTitle">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-git" viewBox="0 0 16 16">
+							<path d="M15.698 7.287 8.712.302a1.03 1.03 0 0 0-1.457 0l-1.45 1.45 1.84 1.84a1.223 1.223 0 0 1 1.55 1.56l1.773 1.774a1.224 1.224 0 0 1 1.267 2.025 1.226 1.226 0 0 1-2.002-1.334L8.58 5.963v4.353a1.226 1.226 0 1 1-1.008-.036V5.887a1.226 1.226 0 0 1-.666-1.608L5.093 2.465l-4.79 4.79a1.03 1.03 0 0 0 0 1.457l6.986 6.986a1.03 1.03 0 0 0 1.457 0l6.953-6.953a1.03 1.03 0 0 0 0-1.457"/>
+						</svg>
+						
+						<span>Recent Commits</span>
+					</div>
+
+					<!--List out the commits with name, link, and changes -->
+					<div class="CommitsCommits">
+						{profileData.map((data) =>
+							<a class="CommitLink" href={data.url}>
+								<div class="commitsDiv">
+									<span class="commitName">{data.repo.split('-').at(-1)}:</span>
+									<span class="commitMessage"> {data.message.split(' ').splice(0, 5).join(' ')}…</span>
+									<span></span>
+								</div>
+
+								<div class="inseritionsDiv">
+									<span class="inseritions">+{data.additions}</span>
+									<span class="commitDivider"> / </span>
+									<span class="deleitions">{data.deletions}</span>
+									<span class="commitDivider"> | </span>
+									<span class="commitDate">{new Date(data.date).toLocaleDateString()}</span>
+								</div>
+
+							</a>
+						)}
+					</div>
+
+					<div class="langBar" role="img"
+						aria-label={languageData.map((l) => `${l.name} ${l.percent.toFixed(1)}%`).join(", ")}>
+						{languageData.map((l) => (
+							<span style={`width: ${l.percent}%; background: ${l.color}`}></span>
+						))}
+					</div>
+
+					<ul class="langLegend">
+						{languageData.map((l) => (
+							<li>
+							<span class="dot" style={`background: ${l.color}`}></span>
+							{l.name} <span class="pct">{l.percent.toFixed(1)}%</span>
+							</li>
+						))}
+					</ul>
+					
+				</div>
+
+				<div id="extraFunBox" class="latestPosts">
+					Lastest Posts
+				</div>
+
+				<div id="extraFunBox" class="obsidian">
+					Obsidian
+				</div>
+
+				<div id="extraFunBox" class="midasCloudStatus">
+					midasCloudStatus
+				</div>
+
+
+
+			</div>
+			<div class="marginDiv15Percent"></div>
+		</div>
+
 
 	</div>
 

@@ -2,7 +2,7 @@ export async function checkHomelabStatus()
 {
     try
     {
-        const response = await fetch(`https://portfolio-worker.guzinskinatan.workers.dev`, 
+        const response = await fetch(`https://portfolio-worker.guzinskinatan.workers.dev/status`, 
             {
                 signal: AbortSignal.timeout(5000), //wait 5 sec for connection
             }

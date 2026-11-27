@@ -8,7 +8,9 @@ const githubProjectsCollection = defineCollection
     loader: glob({pattern: '**/*.md', base: './src/content/projects'}),
     schema: z.object({
         title: z.string(),
+        githubLink: z.string(),
         repo: z.string().regex(/^[\w.-]+\/[\w.-]+$/, 'repo must be "owner/name"'),
+        terminalDesc: z.string(),
         description: z.string(),
         tags: z.array(z.string()).default([]),
         featured: z.boolean().default(false),

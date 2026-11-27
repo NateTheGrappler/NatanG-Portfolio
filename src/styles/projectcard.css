@@ -11,7 +11,7 @@
     transition: transform 200ms ease, border-color 200ms ease;
     margin: 10px 15px 0px 10px;
     box-shadow: 0px 3px 10px #131318;
-
+    container-type: inline-size;
 }
 
 .projectCard:hover,
@@ -35,7 +35,7 @@
     aspect-ratio: 16/8;
     border-radius: 12px;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     flex: 1 1;
     flex-direction: column;
     width: 100%;
@@ -88,6 +88,91 @@
     border-radius: 100%;
 }
 
+.starCountSpan
+{
+    margin-left: 5px;
+    font-family: "JetBrains Mono", monospace;
+
+}
+
+.TerminalTitleDiv
+{
+    padding: 5px;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction:row;
+    flex-wrap: wrap;
+    font-size: clamp(0.7rem, 2vw, 1.05rem);
+
+}
+
+.TerminalOwnerName
+{
+    margin-left: 5px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+    color: var(--pc-owner);
+}
+
+.TerminalName
+{
+    margin-left: 5px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+    color: var(--pc-title);
+}
+
+.TerminalDescription
+{
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction:row;
+    flex-wrap: wrap;
+    font-size: clamp(0.5rem, 2vw, .9rem);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.TerminalBottom 
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.avatars 
+{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+}
+
+.avatars li + li 
+{
+    margin-left: -15px;
+}
+
+.avatars img 
+{
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    object-fit: cover;
+}
+
+.contribCount 
+{
+    padding: 5px;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
 
 
 /*----------------------------information Bottom bit-----------------------*/
@@ -105,6 +190,7 @@
     font-weight: 900;
     font-size: 22px;
     transition: color 0.2s ease;
+    margin-top: 3px;
 
 }
 .projectCard:hover .descriptionDiv h3
@@ -130,12 +216,14 @@
     list-style: none;
     padding: 0;
     margin: 0.75rem 0 0;
+
 }
 .tags li
 {
-    font-size: 0.75rem;
+    font-family: system-ui;
+    font-size: 0.7rem;
     padding: 0.15rem 0.5rem;
     border-radius: 4px;
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--tag-color);
+    background: color-mix(in srgb, var(--tag-bg) 50%, transparent);
 }

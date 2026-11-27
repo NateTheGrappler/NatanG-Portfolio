@@ -5,34 +5,50 @@ const headers = {
   "User-Agent": "natan-portfolio",
   Accept: "application/vnd.github+json", };
 
-//define the data that I query for from the githubQL api
-const PROFILE_QUERY = `
-  query($login: String!) {
-    user(login: $login) {
-      repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {field: PUSHED_AT, direction: DESC}) {
-        totalCount
+//Get recent commits from profile with GraphQL
+const RECENT_COMMITS = `
+  query {
+    viewer {
+      repositories(first: 5, orderBy: { field: PUSHED_AT, direction: DESC }, privacy: PUBLIC) {
         nodes {
           name
-          description
-          url
-          stargazerCount
-          pushedAt
-          languages(first: 10) {
-            edges { size node { name color } }
+          defaultBranchRef {
+            target {
+              ... on Commit {
+                history(first: 3) {
+                  nodes {
+                    messageHeadline
+                    url
+                    committedDate
+                    additions
+                    deletions
+                  }
+                }
+              }
+            }
           }
-        }
-      }
-      contributionsCollection {
-        totalCommitContributions
-        totalPullRequestContributions
-        contributionCalendar {
-          totalContributions
-          weeks { contributionDays { date contributionCount } }
         }
       }
     }
   }
 `;
+const PROFILE_LANGUAGES =
+`
+query {
+  viewer {
+    repositories(first: 100, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC) {
+      nodes {
+        name
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+          edges {
+            size
+            node { name color }
+          }
+        }
+      }
+    }
+  }
+}`;
 let profilePromise: Promise<any> | null = null;
 
 //check if the token is good or not
@@ -102,13 +118,80 @@ export const getCommits = (repo: string, n = 5) => getGithubData(`/repos/${USER}
 export const getStarCount = (repo: string)      => getGithubData(`/repos/${USER}/${repo}/stargazers/count`);
 export const getContibutors = (repo: string)    => getGithubData(`/repos/${USER}/${repo}/contributors`);
 
-export const getActivity = ()                   =>  getGithubData(`/users/${USER}/events/public`);
 
 
 //functions for GraphQL data for the actual homepage/index of the portfolio
-export function getProfile() 
+interface CommitItem 
 {
-    //only assign the data if its still null so you don't waste queries to github
-    profilePromise ??= getGithubQLData(PROFILE_QUERY, { login: USER });
-    return profilePromise;
+  repo: string;
+  message: string;
+  url: string;
+  date: string;
+  additions: number;
+  deletions: number;
+}
+
+export async function recentCommits(amount: number): Promise<CommitItem[]>
+{
+  const profileData = await getGithubQLData(RECENT_COMMITS, {});
+
+  const repos = profileData?.viewer?.repositories.nodes ?? [];
+  const commits: CommitItem[] = [];
+
+  //loop over the repos and then get the commit for each and then the data for each commit
+  for(const repo of repos)
+  {
+    const repoCommits = repo.defaultBranchRef?.target?.history?.nodes ?? [];
+
+    for(const commit of repoCommits)
+    {
+      commits.push(
+        {
+          repo: repo.name,
+          message: commit.messageHeadline,
+          url: commit.url,
+          date: commit.committedDate,
+          additions: commit.additions,
+          deletions: commit.deletions
+        }
+      )
+    }
+  }
+
+  //sort all of the data from newest to oldest
+  commits.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  //return the first 5 only
+  return commits.slice(0, amount);
+}
+
+export async function profileLanguages()
+{
+    const profileData = await getGithubQLData(PROFILE_LANGUAGES, {});
+
+    const repos = profileData?.viewer?.repositories.nodes ?? [];
+
+    //store languages
+    const totals = new Map<string, { bytes: number; color: string }>();
+    let totalBytes = 0;
+
+    for(const repo of repos)
+    {
+      for(const edge of repo.languages.edges)
+      {
+        const { name, color } = edge.node;
+        const entry = totals.get(name) ?? { bytes: 0, color: color ?? "#888" };
+        entry.bytes += edge.size;
+        totals.set(name, entry);
+        totalBytes += edge.size;
+      }
+    }
+
+    const languages = [...totals]
+    .map(([name, { bytes, color }]) => ({ name, color, percent: (bytes / totalBytes) * 100 }))
+    .sort((a, b) => b.percent - a.percent)
+    .slice(0, 6);
+
+    return languages;
+
 }

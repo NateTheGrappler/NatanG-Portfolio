@@ -217,7 +217,266 @@
     gap: 1.25rem;
 }
 
+/*------------------Extra Fun Div for button, theme, etc-----------------*/
 
+.ExtraFunDiv
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 150px;
+}
+
+.ExtraFunDivGrid
+{
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: 4fr 6fr;
+    grid-template-rows: minmax(10rem, auto) minmax(10rem, auto) auto auto;    
+    grid-template-areas: 
+        "themePicker  obsidian"
+        "clickMe      obsidian"
+        "latestPosts recentCommit"
+        "midasCloudStatus   midasCloudStatus";
+    gap: 1.2rem;
+}
+
+#extraFunBox
+{
+    padding:.8rem; 
+    border: 1px solid var(--pc-border);
+    border-radius: 8px;
+    box-shadow: 0px 3px 10px #131318;
+}
+
+.themePicker
+{
+    grid-area: themePicker;
+}
+
+.clickMe
+{ 
+    grid-area: clickMe;
+    display: grid;
+    flex: auto;
+    grid-template-columns: 5fr 5fr;
+    grid-template-rows: 6fr 4fr;    
+    grid-template-areas: 
+        "totalText  userText"
+        "clickMeDiv   clickMeDiv";
+    gap: 0.5rem;
+
+}
+.clickMeDiv
+{
+    grid-area: clickMeDiv;
+    display: flex;
+    justify-content: center;
+    border-top: solid 1px var(--pc-border);
+    align-items: center;
+}
+#clickMeButton
+{
+    background-color: var(--accent);
+    color: var(--bg);
+    font-weight: bolder;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    border-radius: 12px;
+    border: solid 2px var(--dark-text);
+    padding: 10px;
+    margin-top: 10px;
+    transition: transform 0.2s ease-out, filter 0.2s ease-out;
+}
+#clickMeButton:hover
+{
+    transform: scale(1.05);
+    filter: brightness(0.85);
+}
+.totalText
+{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    grid-area: totalText;
+    justify-content: center;
+    align-items: center;
+}
+.totalText1
+{
+    display: block;
+    color: var(--accent);
+    font-weight: bolder;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 32px;
+}
+.totalText2
+{
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+}
+.userText
+{
+    display: flex;
+    flex-direction: column;
+    grid-area: userText;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+.userText1
+{
+    display: block;
+    color: var(--user-clicks);
+    font-weight: bolder;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 32px;
+}
+.userText2
+{
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+}
+
+
+
+
+
+.recentCommit
+{ 
+    grid-area: recentCommit
+}
+.CommitsTitle
+{
+    display: flex;
+    flex-direction: row;
+}
+.CommitsTitle svg
+{
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
+}
+.CommitsTitle span
+{
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    color: var(--text);
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.CommitLink
+{
+    margin-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+.commitName
+{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+}
+.commitMessage
+{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+.CommitLink:hover .commitName
+{
+    text-decoration: underline;
+}
+.CommitLink:hover .commitMessage
+{
+    color: var(--accent);
+}
+.inseritions
+{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--pc-title);
+}
+.commitDivider
+{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--dark-text);
+}
+.deleitions
+{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--pc-owner);
+}
+.commitDate
+{
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 100;
+    font-size: 12px;
+    color: var(--muted);
+}
+.langBar 
+{
+  display: flex;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  gap: 2px;
+  margin-top: 15px;
+}
+
+.langLegend 
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-left: 3px;
+}
+
+.dot 
+{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.35rem;
+}
+
+.pct { color: var(--accent); }
+
+
+
+.latestPosts
+{ 
+    grid-area: latestPosts
+}
+.obsidian           
+{ 
+    grid-area: obsidian
+}
+.midasCloudStatus
+{
+    grid-area: midasCloudStatus
+}
 
 
 

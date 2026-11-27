@@ -1,7 +1,7 @@
 :root,
 [data-theme="mocha"] {
   --bg: #1e1e2e;
-  --text: #CCD5F4; /*Usually black or white*/
+  --text: #c3cbe9; /*Usually black or white*/
   --color-text: #CAA5F7;
   --dark-text: #8c73aa;
   --muted: #9fa1ad;
@@ -13,6 +13,10 @@
   --pc-stage: #A8B3BF;
   --pc-terminal: #2C2E3A;
   --pc-border: #37374e;
+  --pc-owner: #C16296;
+  --pc-title: #5AB47A;
+
+  --user-clicks: #88B3FA;
 }
 
 * {
